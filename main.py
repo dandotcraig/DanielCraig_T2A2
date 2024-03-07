@@ -5,11 +5,11 @@ from init import db, ma, bcrypt, jwt
 def create_app():
     app = Flask(__name__)
 
-    #configs
+    #configs - passwords etc, hidden using .env
     app.config["SQLALCHEMY_DATABASE_URI"]=os.environ.get("DATABASE_URI")
     app.config["JWT_SECRET_KEY"]=os.environ.get("JWT_SECRET_KEY")
 
-    #app factories - connecting our app
+    #app factories - connecting our app via init
     db.init_app(app)
     ma.init_app(app)
     bcrypt.init_app(app)
