@@ -1,5 +1,7 @@
 from init import db, ma
 
+
+# formating our table
 class User(db.Model):
     __tablename__ = "users"
 
