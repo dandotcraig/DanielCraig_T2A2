@@ -224,3 +224,5 @@ All tasks will be allocated and tracked using the free version of Trello. First 
 * https://kinsta.com/blog/postgresql-vs-mysql/#:~:text=Ultimately%2C%20it%20comes%20down%20to,massive%20datasets%2C%20and%20complicated%20queries.
 * https://kinsta.com/blog/postgresql-vs-mysql/#:~:text=Ultimately%2C%20it%20comes%20down%20to,massive%20datasets%2C%20and%20complicated%20queries.
 * https://www.freecodecamp.org/news/what-is-an-orm-the-meaning-of-object-relational-mapping-database-tools/
+* https://stackoverflow.com/questions/2676133/best-way-to-do-enum-in-sqlalchemy
+* https://medium.com/@danielwume/must-know-package-to-build-your-system-real-world-examples-with-sqlalchemy-in-python-db8c72a0f6c1
