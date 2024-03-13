@@ -226,3 +226,5 @@ All tasks will be allocated and tracked using the free version of Trello. First 
 * https://www.freecodecamp.org/news/what-is-an-orm-the-meaning-of-object-relational-mapping-database-tools/
 * https://stackoverflow.com/questions/2676133/best-way-to-do-enum-in-sqlalchemy
 * https://medium.com/@danielwume/must-know-package-to-build-your-system-real-world-examples-with-sqlalchemy-in-python-db8c72a0f6c1
+* https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html#one-to-one
+* https://rest-apis-flask.teclado.com/docs/sqlalchemy_many_to_many/many_to_many_relationships/
