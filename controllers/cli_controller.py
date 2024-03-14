@@ -7,6 +7,7 @@ from models.account import Account
 # WHY WONT THIS IMPORT
 from models.favourites_list import FavouritesList
 from models.search_input import SearchInput
+from models.favourite_search import FavouriteSearch
 
 db_commands = Blueprint('db', __name__)
 
@@ -36,40 +37,67 @@ def seed_tables():
     ]
 
     db.session.add_all(users)
+    db.session.commit()
 
-    account = [
+
+    accounts = [
         Account(
             account_type="business",
-            user=users[0]
+            users=[users[0]]
         ),
         Account(
             account_type="personal",
-            user=users[1]
+            users=[users[1]]
         )
     ]
 
-    db.session.add_all(account)
+    db.session.add_all(accounts)
+    db.session.commit()
 
-    favourites_list = [
+
+    favourites_lists = [
         FavouritesList(
-            title=date.today(),
-            account=account[0],
-            search_input=search_input[0]
+            date=date.today(),
+            account=accounts[0],
+            search_input=search_inputs[0]
+        ),
+        FavouritesList(
+            date=date.today(),
+            account=accounts[1],
+            search_input=search_inputs[1]
         )
-    ]
+]
 
-    db.session.add_all(favourites_list)
 
-    search_input = [
+    db.session.add_all(favourites_lists)
+    db.session.commit()
+
+
+    search_inputs = [
         SearchInput(
-           title=date.today(),
-           search_input="good places to eat in Sydney", 
-           FavouritesList=favourites_list[0]
+            date=date.today(),
+            search_input="good places to eat in Sydney",
+            favourites_list=favourites_lists[0]
+        ),
+        SearchInput(
+            date=date.today(),
+            search_input="cafe Sydney",
+            favourites_list=favourites_lists[1]
         )
     ]
 
-    db.session.add_all(search_input)
+    db.session.add_all(search_inputs)
+    db.session.commit()
 
+
+    favourite_searches = [
+        FavouriteSearch(
+            search_input=search_inputs[0],
+            favourites_list=favourites_lists[0]
+        )
+    ]
+
+    db.session.add_all(favourite_searches)
     db.session.commit()
 
     print("Tables seeded")

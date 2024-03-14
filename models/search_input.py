@@ -10,7 +10,7 @@ class SearchInput(db.Model):
     date = db.Column(db.Date)
     search_input = db.Column(db.String, nullable=False)
 
-    favourites_list = db.relationship('FavouriteSearch', secondary='favourite_search', back_populates='search_input', cascade='all, delete')
+    favourites_list = db.relationship('FavouritesList', secondary='favourite_search', back_populates='search_input')
 
 # structure of the database
 class SearchInputSchema(ma.Schema):
@@ -18,19 +18,25 @@ class SearchInputSchema(ma.Schema):
     favourites_list = fields.List(fields.Nested('FavouritesListSchem', exclude=['user']))
 
     class Meta:
-        fields = ('id', 'search_input', 'date')
+        fields = ('id', 'date', 'search_input', 'favourites_list')
 
 Search_input_Schema = SearchInputSchema()
 Search_inputs_Schema = SearchInputSchema(many=True)
 
 
-    # HOW I WANT IT RETURNED
-    # {
-    #   id: 1,
-    #   data: [00/00/00],
-    #   search_input: Favourited_search_result
-    #   favourites_list: [
-    #       {id: 1 account: 1}
-    #       {id: 2 account: 2}
-    #       etc
-    # }
+# HOW I WANT IT RETURNED
+
+# {
+#   "id": 1,
+#   "date": "2024-03-15",
+#   "search_input": "restaurants",
+#   "favourites_list": [
+#     {
+#       "date": "2024-03-15",
+#       "account": {
+#         "id": 1,
+#         "account_type": "personal"
+#       }
+#     }
+#   ]
+# }
