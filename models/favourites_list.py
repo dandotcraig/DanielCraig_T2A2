@@ -11,7 +11,8 @@ class FavouritesList(db.Model):
     
     account = db.relationship('Account', back_populates='favourites_list', cascade='all, delete')
 
-    search_input = db.relationship('SearchInput', secondary='favourite_search', back_populates='favourites_list')
+    favourite_search = db.relationship("FavouriteSearch", back_populates="favourites_list")
+
 
 class FavouritesListSchema(ma.Schema):
 

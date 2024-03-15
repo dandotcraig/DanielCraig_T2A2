@@ -10,7 +10,7 @@ class SearchInput(db.Model):
     date = db.Column(db.Date)
     search_input = db.Column(db.String, nullable=False)
 
-    favourites_list = db.relationship('FavouritesList', secondary='favourite_search', back_populates='search_input')
+    favourite_search = db.relationship("FavouriteSearch", back_populates="search_input")
 
 # structure of the database
 class SearchInputSchema(ma.Schema):
@@ -26,17 +26,17 @@ Search_inputs_Schema = SearchInputSchema(many=True)
 
 # HOW I WANT IT RETURNED
 
-# {
-#   "id": 1,
-#   "date": "2024-03-15",
-#   "search_input": "restaurants",
-#   "favourites_list": [
-#     {
-#       "date": "2024-03-15",
-#       "account": {
-#         "id": 1,
-#         "account_type": "personal"
-#       }
-#     }
-#   ]
-# }
+{
+  "id": 1,
+  "date": "2024-03-15",
+  "search_input": "restaurants",
+  "favourites_list": [
+    {
+      "date": "2024-03-15",
+      "account": {
+        "id": 1,
+        "account_type": "personal"
+      }
+    }
+  ]
+}

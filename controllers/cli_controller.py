@@ -55,35 +55,44 @@ def seed_tables():
     db.session.commit()
 
 
+#     favourites_lists = [
+#         FavouritesList(
+#             date=date.today(),
+#             account=accounts[0],
+#             search_input=search_inputs[0]
+#         ),
+#         FavouritesList(
+#             date=date.today(),
+#             account=accounts[1],
+#             search_input=search_inputs[1]
+#         )
+# ]
+    
     favourites_lists = [
         FavouritesList(
-            date=date.today(),
-            account=accounts[0],
-            search_input=search_inputs[0]
-        ),
+            date=date.today(), 
+            account=accounts[0]
+            ),
         FavouritesList(
-            date=date.today(),
-            account=accounts[1],
-            search_input=search_inputs[1]
-        )
-]
+            date=date.today(), 
+            account=accounts[1]
+            ),
+    ]
 
 
     db.session.add_all(favourites_lists)
     db.session.commit()
 
 
-    search_inputs = [
+    search_inputs = [        
         SearchInput(
             date=date.today(),
             search_input="good places to eat in Sydney",
-            favourites_list=favourites_lists[0]
         ),
         SearchInput(
             date=date.today(),
             search_input="cafe Sydney",
-            favourites_list=favourites_lists[1]
-        )
+        ),
     ]
 
     db.session.add_all(search_inputs)
