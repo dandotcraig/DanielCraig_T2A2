@@ -12,19 +12,21 @@ class Account(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     account_type = db.Column(Enum(BusinessPersonal), nullable=False)
+    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
    
-    users = db.relationship('User', back_populates='account')
+    user = db.relationship('User', back_populates='account')
 
     favourites_list = db.relationship('FavouritesList', back_populates='account', cascade='all, delete')
 
 class AccountSchema(ma.Schema):
 
-    users = fields.Nested('UserSchema', only = ['name', 'email'])
+    user = fields.Nested('UserSchema', only = ['name', 'email'])
 
     favourites_list = fields.Nested('FavouritesListSchema')
     
     class Meta:
-        fields = ('id', 'account_type', 'users', 'favourites_list')
+        fields = ('id', 'account_type', 'user', 'favourites_list')
 
 Account_schema = AccountSchema()
 Accounts_schema = AccountSchema(many=True)

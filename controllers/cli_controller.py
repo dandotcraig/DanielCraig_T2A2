@@ -43,11 +43,11 @@ def seed_tables():
     accounts = [
         Account(
             account_type="business",
-            users=[users[0]]
+            user=users[0]
         ),
         Account(
             account_type="personal",
-            users=[users[1]]
+            user=users[1]
         )
     ]
 
