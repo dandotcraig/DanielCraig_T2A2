@@ -1,17 +1,13 @@
 from init import db, ma
-import enum
-from sqlalchemy import Enum
 from marshmallow import fields
-
-class BusinessPersonal(enum.Enum):
-    business = 'business'
-    personal = 'personal'
+from datetime import datetime
 
 class Account(db.Model):
     __tablename__ = "account"
 
     id = db.Column(db.Integer, primary_key=True)
-    account_type = db.Column(Enum(BusinessPersonal), nullable=False)
+    is_business_account = db.Column(db.Boolean, default=False)
+    date_added = db.Column(db.DateTime, default=datetime.utcnow) 
     
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
    
@@ -26,7 +22,8 @@ class AccountSchema(ma.Schema):
     favourites_list = fields.Nested('FavouritesListSchema')
     
     class Meta:
-        fields = ('id', 'account_type', 'user', 'favourites_list')
+        fields = ('id', 'is_business_account', 'user', 'date_added', 'favourites_list')
+        ordered=True
 
 Account_schema = AccountSchema()
 Accounts_schema = AccountSchema(many=True)

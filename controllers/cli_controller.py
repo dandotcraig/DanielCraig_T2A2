@@ -4,7 +4,7 @@ from flask import Blueprint
 from init import db, bcrypt
 from models.user import User
 from models.account import Account
-# WHY WONT THIS IMPORT
+
 from models.favourites_list import FavouritesList
 from models.search_input import SearchInput
 from models.favourite_search import FavouriteSearch
@@ -25,6 +25,7 @@ def drop_tables():
 def seed_tables():
     users = [
         User(
+            name="Admin 1",
             email="admin@email.com",
             password=bcrypt.generate_password_hash('123456').decode('utf-8'),
             is_admin=True
@@ -42,12 +43,14 @@ def seed_tables():
 
     accounts = [
         Account(
-            account_type="business",
-            user=users[0]
+            # account_type="business",
+            user=users[0],
+            is_business_account=True
         ),
         Account(
-            account_type="personal",
-            user=users[1]
+            # account_type="personal",
+            user=users[1],
+            is_business_account=True
         )
     ]
 
@@ -55,26 +58,11 @@ def seed_tables():
     db.session.commit()
 
 
-#     favourites_lists = [
-#         FavouritesList(
-#             date=date.today(),
-#             account=accounts[0],
-#             search_input=search_inputs[0]
-#         ),
-#         FavouritesList(
-#             date=date.today(),
-#             account=accounts[1],
-#             search_input=search_inputs[1]
-#         )
-# ]
-    
     favourites_lists = [
         FavouritesList(
-            date=date.today(), 
             account=accounts[0]
             ),
         FavouritesList(
-            date=date.today(), 
             account=accounts[1]
             ),
     ]
@@ -86,11 +74,9 @@ def seed_tables():
 
     search_inputs = [        
         SearchInput(
-            date=date.today(),
             search_input="good places to eat in Sydney",
         ),
         SearchInput(
-            date=date.today(),
             search_input="cafe Sydney",
         ),
     ]

@@ -9,7 +9,6 @@ class User(db.Model):
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-    # account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=True)
     
     account = db.relationship('Account', back_populates='user', cascade='all, delete')
     
