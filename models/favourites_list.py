@@ -7,7 +7,6 @@ class FavouritesList(db.Model):
     __tablename__ = "favourites_list"
 
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.Date)
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
     
