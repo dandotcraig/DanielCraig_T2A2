@@ -8,6 +8,7 @@ from psycopg2 import errorcodes
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+# http://127.0.0.1:8080/auth/register
 @auth_bp.route("/register", methods=["POST"])
 def auth_register():
     try:
@@ -19,7 +20,6 @@ def auth_register():
             name=body_data.get('name'),
             email=body_data.get('email')
         )
-
         #password from the request body
         password = body_data.get('password')
         
@@ -42,7 +42,7 @@ def auth_register():
         if err.orig.pgcode == errorcodes.UNIQUE_VIOLATION:
             return {"error": "Email address already in use"}, 409
 
-    
+# http://127.0.0.1:8080/auth/login
 @auth_bp.route("/login", methods=["POST"])
 def auth_login():
     # get the request body
