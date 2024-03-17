@@ -17,8 +17,11 @@ class FavouritesList(db.Model):
 
 class FavouritesListSchema(ma.Schema):
 
-    account = fields.Nested('AccountSchema', only=('id',))
+    account = fields.Nested('AccountSchema', only=('id', 'user'))
 
+    # favourite_search = fields.Nested('Search_inputs_Schema', only = ['search_input'])
+
+    # TRYING TO FIX direct to search input:
     search_input = fields.Nested('SearchInputSchema', only = ['search_input'])
     
     class Meta:

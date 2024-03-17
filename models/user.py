@@ -20,8 +20,8 @@ class UserSchema(ma.Schema):
     class Meta:
         fields = ('id', 'name', 'email', 'password', 'is_admin', 'account')
 
-user_schema = UserSchema(exclude=['password'])
-users_schema = UserSchema(many=True, exclude=['password'])
+User_schema = UserSchema(exclude=['password'])
+Users_schema = UserSchema(many=True, exclude=['password'])
 
 # HOW I WANT IT RETURNED
 

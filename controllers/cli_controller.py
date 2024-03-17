@@ -43,12 +43,10 @@ def seed_tables():
 
     accounts = [
         Account(
-            # account_type="business",
             user=users[0],
             is_business_account=True
         ),
         Account(
-            # account_type="personal",
             user=users[1],
             is_business_account=True
         )
@@ -94,5 +92,7 @@ def seed_tables():
 
     db.session.add_all(favourite_searches)
     db.session.commit()
+
+    
 
     print("Tables seeded")

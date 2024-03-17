@@ -1,7 +1,7 @@
 from datetime import timedelta
 from flask import Blueprint, request
 from init import db, bcrypt
-from models.user import User, user_schema
+from models.user import User, User_schema
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import create_access_token
 from psycopg2 import errorcodes
@@ -33,7 +33,7 @@ def auth_register():
         db.session.commit()
 
         #respond back to the client insomnia
-        return user_schema.dump(user), 201
+        return User_schema.dump(user), 201
     
     except IntegrityError as err:
         print(err.orig.diag.column_name)
@@ -55,7 +55,11 @@ def auth_login():
         # create jwt
         token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))
         #return the token along with the user info
-        return {"email": user.email, "token": token, "is_admin": user.is_admin}
+        user_data = User_schema.dump(user)
+        user_data["token"] = token
+        return user_data
+        # return {**User_schema.dump(user), "token": token}, 201
+        # return {"email": user.email, "token": token, "is_admin": user.is_admin}
     # else
     else:
         # return error
