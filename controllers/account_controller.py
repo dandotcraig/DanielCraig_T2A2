@@ -2,6 +2,8 @@ from flask import Blueprint
 
 from init import db
 from models.account import Account, Account_schema, Accounts_schema
+from models.favourites_list import FavouritesList, Favourites_list_schema, Favourites_lists_schema
+
 
 
 account_bp = Blueprint('account', __name__, url_prefix='/account')
@@ -12,6 +14,15 @@ def get_account(account_id):
     account = db.session.scalar(stmt)
     return Account_schema.dump(account)
 
+
+
+favourites_list_bp = Blueprint('favourites_list', __name__, url_prefix='/account/favourites_list')
+
+@favourites_list_bp.route('/<int:favourites_list_id>')
+def get_favourites_list(favourites_list_id):
+    stmt = db.select(FavouritesList).filter_by(id=favourites_list_id)
+    favourites_list = db.session.scalar(stmt)
+    return Favourites_list_schema.dump(favourites_list)
 
 
 @account_bp.route('/')

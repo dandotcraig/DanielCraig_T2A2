@@ -4,7 +4,7 @@ from init import db
 from models.favourites_list import FavouritesList, Favourites_list_schema, Favourites_lists_schema
 
 
-favourites_list_bp = Blueprint('favourites_list', __name__, url_prefix='/favourites_list')
+favourites_list_bp = Blueprint('favourites_list', __name__, url_prefix='/account/favourites_list')
 
 @favourites_list_bp.route('/<int:favourites_list_id>')
 def get_favourites_list(favourites_list_id):

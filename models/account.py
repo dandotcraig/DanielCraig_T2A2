@@ -19,10 +19,10 @@ class AccountSchema(ma.Schema):
 
     user = fields.Nested('UserSchema', only = ['name', 'email'])
 
-    favourites_list = fields.Nested('FavouritesListSchema')
+    favourites_list = fields.Nested('FavouritesListSchema', only = ['id', 'favourite_search'])
     
     class Meta:
-        fields = ('id', 'is_business_account', 'user', 'date_added', 'favourites_list')
+        fields = ('id', 'is_business_account', 'user', 'date_added')
         ordered=True
 
 Account_schema = AccountSchema()
