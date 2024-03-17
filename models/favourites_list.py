@@ -19,13 +19,12 @@ class FavouritesListSchema(ma.Schema):
 
     account = fields.Nested('AccountSchema', only=('id', 'user'))
 
-    # favourite_search = fields.Nested('Search_inputs_Schema', only = ['search_input'])
+    search_input = (fields.Nested('SearchInputSchema', only = ['search_input']))
 
-    # TRYING TO FIX direct to search input:
-    search_input = fields.Nested('SearchInputSchema', only = ['search_input'])
+    favourite_search = fields.List(fields.Nested('FavouriteSearchSchema'))
     
     class Meta:
-        fields = ('id', 'date', 'account', 'date_added', 'search_input')
+        fields = ('id', 'account', 'date_added', 'search_input', 'favourite_search')
         ordered=True
 
 Favourites_list_schema = FavouritesListSchema()

@@ -33,5 +33,8 @@ def create_app():
     from controllers.search_input_controller import search_input_bp
     app.register_blueprint(search_input_bp)
 
+    from controllers.favourite_search_controller import favourite_search_bp
+    app.register_blueprint(favourite_search_bp)
+
     return app
 

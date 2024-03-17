@@ -77,6 +77,12 @@ def seed_tables():
         SearchInput(
             search_input="cafe Sydney",
         ),
+        SearchInput(
+            search_input="new shops in sydney",
+        ),
+        SearchInput(
+            search_input="best beach sydney",
+        ),
     ]
 
     db.session.add_all(search_inputs)
@@ -87,7 +93,19 @@ def seed_tables():
         FavouriteSearch(
             search_input=search_inputs[0],
             favourites_list=favourites_lists[0]
-        )
+        ),
+        FavouriteSearch(
+            search_input=search_inputs[1],
+            favourites_list=favourites_lists[1]
+        ),
+        FavouriteSearch(
+            search_input=search_inputs[2],
+            favourites_list=favourites_lists[0]
+        ),
+        FavouriteSearch(
+            search_input=search_inputs[3],
+            favourites_list=favourites_lists[1]
+        ),
     ]
 
     db.session.add_all(favourite_searches)

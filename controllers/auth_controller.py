@@ -58,9 +58,7 @@ def auth_login():
         user_data = User_schema.dump(user)
         user_data["token"] = token
         return user_data
-        # return {**User_schema.dump(user), "token": token}, 201
-        # return {"email": user.email, "token": token, "is_admin": user.is_admin}
-    # else
+
     else:
         # return error
         return {"error": "Invalid email or password"}, 401

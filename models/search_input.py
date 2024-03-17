@@ -15,6 +15,8 @@ class SearchInputSchema(ma.Schema):
 
     favourites_list = fields.List(fields.Nested('FavouritesListSchem', exclude=['user']))
 
+    favourite_search = fields.List(fields.Nested('FavouriteSearchSchema'))
+
     class Meta:
         fields = ('id', 'search_input',  'date_added', 'favourites_list')
         ordered = True
