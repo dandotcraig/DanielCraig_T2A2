@@ -13,7 +13,7 @@ class SearchInput(db.Model):
 
 class SearchInputSchema(ma.Schema):
 
-    favourites_list = fields.List(fields.Nested('FavouritesListSchem', exclude=['user']))
+    favourites_list = fields.List(fields.Nested('FavouritesListSchem', only=['id']))
 
     favourite_search = fields.List(fields.Nested('FavouriteSearchSchema'))
 

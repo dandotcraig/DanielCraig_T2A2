@@ -36,5 +36,8 @@ def create_app():
     from controllers.favourite_search_controller import favourite_search_bp
     app.register_blueprint(favourite_search_bp)
 
+    from controllers.favourite_search_admin_controller import favourite_search_bp
+    app.register_blueprint(favourite_search_bp)
+
     return app
 

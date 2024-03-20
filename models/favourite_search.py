@@ -20,10 +20,10 @@ class FavouriteSearchSchema(ma.Schema):
 
     favourites_list = fields.List(fields.Nested('FavouritesListSchem', only = ['account']))
     
-    search_input = fields.Nested('SearchInputSchema', only = ['search_input'])
+    search_input = fields.Nested('SearchInputSchema', only = ['search_input', 'id'])
 
     class Meta:
-        fields = ('id', 'search_input', 'favourites_list_id', 'date_added')
+        fields = ('id', 'search_input', 'id', 'favourites_list_id', 'date_added')
 
 Favourite_search_schema = FavouriteSearchSchema()
 Favourite_searchs_schema = FavouriteSearchSchema(many=True)

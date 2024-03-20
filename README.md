@@ -228,3 +228,4 @@ All tasks will be allocated and tracked using the free version of Trello. First 
 * https://medium.com/@danielwume/must-know-package-to-build-your-system-real-world-examples-with-sqlalchemy-in-python-db8c72a0f6c1
 * https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html#one-to-one
 * https://rest-apis-flask.teclado.com/docs/sqlalchemy_many_to_many/many_to_many_relationships/
+* https://stackoverflow.com/questions/18110033/getting-first-row-from-sqlalchemy
