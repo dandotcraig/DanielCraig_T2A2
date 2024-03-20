@@ -10,12 +10,11 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     
-    account = db.relationship('Account', back_populates='user', cascade='all, delete')
+    account = db.relationship('Account', back_populates='user', uselist=False)
     
-
 class UserSchema(ma.Schema):
 
-    account = fields.List(fields.Nested('AccountSchema', exclude=['user']))
+    account = fields.Nested('AccountSchema', exclude=['user'])
     
     class Meta:
         fields = ('id', 'name', 'email', 'password', 'is_admin', 'account')
@@ -23,17 +22,4 @@ class UserSchema(ma.Schema):
 User_schema = UserSchema(exclude=['password'])
 Users_schema = UserSchema(many=True, exclude=['password'])
 
-# HOW I WANT IT RETURNED
-
-# User:
-# {
-#   "id": 1,
-#   "name": "John Doe",
-#   "email": "john@example.com",
-#   "is_admin": false,
-#   "account": {
-#     "id": 1,
-#     "account_type": "personal"
-#   }
-# }
 

@@ -9,7 +9,7 @@ class Account(db.Model):
     is_business_account = db.Column(db.Boolean, default=False)
     date_added = db.Column(db.DateTime, default=datetime.utcnow) 
     
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), unique=True, nullable=False)
    
     user = db.relationship('User', back_populates='account')
 
@@ -28,26 +28,3 @@ class AccountSchema(ma.Schema):
 Account_schema = AccountSchema()
 Accounts_schema = AccountSchema(many=True)
 
-# HOW I WANT IT RETURNED
-# {
-#   "id": 1,
-#   "account_type": "personal",
-#   "users": [
-#     {
-#       "name": "John Doe",
-#       "email": "john@example.com"
-#     }
-#   ],
-#   "favourites_list": [
-#     {
-#       "id": 1,
-#       "date": "2024-03-15",
-#       "search_input": [
-#         {
-#           "search_input": "restaurants",
-#           "date": "2024-03-15"
-#         }
-#       ]
-#     }
-#   ]
-# }

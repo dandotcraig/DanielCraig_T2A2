@@ -8,6 +8,7 @@ from psycopg2 import errorcodes
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+# Register user (auth)
 # http://127.0.0.1:8080/auth/register
 @auth_bp.route("/register", methods=["POST"])
 def auth_register():
@@ -33,7 +34,7 @@ def auth_register():
         db.session.commit()
 
         #respond back to the client insomnia
-        return User_schema.dump(user), 201
+        return User_schema.dump([user]), 201
     
     except IntegrityError as err:
         print(err.orig.diag.column_name)
@@ -42,6 +43,7 @@ def auth_register():
         if err.orig.pgcode == errorcodes.UNIQUE_VIOLATION:
             return {"error": "Email address already in use"}, 409
 
+# Login (auth)
 # http://127.0.0.1:8080/auth/login
 @auth_bp.route("/login", methods=["POST"])
 def auth_login():

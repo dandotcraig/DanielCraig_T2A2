@@ -1,14 +1,9 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
-
 from init import db
 from models.account import Account, Account_schema, Accounts_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.favourites_list import FavouritesList, Favourites_list_schema, Favourites_lists_schema
-
-
-
-
 
 account_bp = Blueprint('account', __name__, url_prefix='/account')
 
@@ -24,6 +19,7 @@ def get_favourites_list(account_id):
     else:
         return {"ERROR": f"Favourite with this account {account_id} not found"}, 404
 
+# Get account (auth)
 # http://127.0.0.1:8080/account/2
 @account_bp.route('/<int:account_id>')
 @jwt_required()
@@ -36,7 +32,7 @@ def get_account(account_id):
         return {"ERROR": f"Account with {account_id} not found"}, 404
 
 # Get ALL accounts (auth)
-# ADMIN http://127.0.0.1:8080/account
+# Admin http://127.0.0.1:8080/account
 @account_bp.route('/')
 @jwt_required()
 def get_all_accounts():
@@ -45,8 +41,8 @@ def get_all_accounts():
     return Accounts_schema.dump(accounts)
 
 # Create account (auth)
-# CREATE http://127.0.0.1:8080/account
-@account_bp.route('/', methods=['POST'])
+# Create http://127.0.0.1:8080/account/create
+@account_bp.route('/create', methods=['POST'])
 @jwt_required()
 def create_account():
     body_data = request.get_json()
@@ -61,7 +57,8 @@ def create_account():
 
     return Account_schema.dump(account), 201
 
-# DELETE http://127.0.0.1:8080/account
+# Delete account
+# Delete http://127.0.0.1:8080/account
 @account_bp.route('/<int:account_id>', methods=['DELETE'])
 @jwt_required()
 def delete_account(account_id):
