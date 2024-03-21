@@ -34,7 +34,7 @@ def auth_register():
         db.session.commit()
 
         #respond back to the client insomnia
-        return User_schema.dump([user]), 201
+        return User_schema.dump(user), 201
     
     except IntegrityError as err:
         print(err.orig.diag.column_name)

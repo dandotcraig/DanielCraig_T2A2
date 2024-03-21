@@ -6,11 +6,11 @@ from models.account import Account, Account_schema, Accounts_schema
 from models.search_input import SearchInput, Search_input_Schema, Search_inputs_Schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-favourite_search_bp = Blueprint('favourite_search', __name__, url_prefix='/account/<int:account_id>/favourites_list')
+favourite_search_bp = Blueprint('favourite_search', __name__, url_prefix='/account')
 
 # Delete accounts favourites search
 # Delete http://127.0.0.1:8080/account/2/favourites_list/2
-@favourite_search_bp.route('/<int:favourite_search_id>', methods=['DELETE'])
+@favourite_search_bp.route('/<int:account_id>/favourites_list/<int:favourites_list_id>', methods=['DELETE'])
 @jwt_required()
 def delete_favourite_search(favourite_search_id, account_id):
     favourite_search = db.session.query(FavouriteSearch).filter_by(id=favourite_search_id).first()
@@ -23,7 +23,7 @@ def delete_favourite_search(favourite_search_id, account_id):
     
 # Create accounts favourites search Clicks on a search input, while already logged in
 # Create http://127.0.0.1:8080/account/2/favourites_list/
-@favourite_search_bp.route('/<int:favourites_list_id>', methods=['POST'])
+@favourite_search_bp.route('/<int:account_id>/favourites_list/<int:favourites_list_id>', methods=['POST'])
 @jwt_required()
 def create_favourite_search(account_id, favourites_list_id):
     body_data = request.get_json()

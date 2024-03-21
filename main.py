@@ -30,6 +30,9 @@ def create_app():
     from controllers.favourites_list_controller import favourites_list_bp
     app.register_blueprint(favourites_list_bp)
 
+    from controllers.favourites_list_admin_controller import favourites_list_admin_bp
+    app.register_blueprint(favourites_list_admin_bp)
+
     from controllers.search_input_controller import search_input_bp
     app.register_blueprint(search_input_bp)
 
