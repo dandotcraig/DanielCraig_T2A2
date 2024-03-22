@@ -7,10 +7,10 @@ class FavouritesList(db.Model):
     __tablename__ = "favourites_list"
 
     id = db.Column(db.Integer, primary_key=True)
-    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
     
-    account = db.relationship('Account', back_populates='favourites_list', cascade='all, delete')
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), unique=True, nullable=True)
+    account = db.relationship('Account', back_populates='favourites_list')
 
     favourite_search = db.relationship("FavouriteSearch", back_populates="favourites_list")
 

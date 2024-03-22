@@ -1,6 +1,7 @@
 from init import db, ma
 from marshmallow import fields
 from datetime import datetime
+from marshmallow.validate import Length
 
 class SearchInput(db.Model):
     __tablename__ = "search_input"
@@ -13,12 +14,14 @@ class SearchInput(db.Model):
 
 class SearchInputSchema(ma.Schema):
 
+    search_input = fields.String(validate=Length(min=3, error="Search must be atleast 2 characters in length"))
+
     favourites_list = fields.List(fields.Nested('FavouritesListSchem', only=['id']))
 
     favourite_search = fields.List(fields.Nested('FavouriteSearchSchema'))
 
     class Meta:
-        fields = ('id', 'search_input',  'date_added', 'favourites_list')
+        fields = ('id', 'search_input', 'date_added', 'favourites_list')
         ordered = True
 
 Search_input_Schema = SearchInputSchema()

@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from init import db
 from models.account import Account, Account_schema, Accounts_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from models.user import User
 from models.favourites_list import FavouritesList, Favourites_list_schema, Favourites_lists_schema
 
 account_bp = Blueprint('account', __name__, url_prefix='/account')
@@ -36,6 +37,10 @@ def get_account(account_id):
 @account_bp.route('/')
 @jwt_required()
 def get_all_accounts():
+    # check users admin status
+    is_admin = is_user_admin()
+    if not is_admin:
+        return {"error": "you're not an admin user"}
     stmt = db.select(Account).order_by(Account.date_added.desc())
     accounts = db.session.scalars(stmt)
     return Accounts_schema.dump(accounts)
@@ -45,6 +50,7 @@ def get_all_accounts():
 @account_bp.route('/create', methods=['POST'])
 @jwt_required()
 def create_account():
+    # body_data = Account_schema.load(request.get_json())
     body_data = request.get_json()
     # Create new card
     account = Account(
@@ -72,3 +78,10 @@ def delete_account(account_id):
     
     else:
         return {'error': f"account with id {account_id} not found"}, 404
+
+
+def is_user_admin():
+    user_id = get_jwt_identity()
+    stmt = db.select(User).filter_by(id=user_id)
+    user = db.session.scalar(stmt)
+    return user.is_admin

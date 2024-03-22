@@ -18,20 +18,12 @@ class FavouriteSearch(db.Model):
 
 class FavouriteSearchSchema(ma.Schema):
 
-    favourites_list = fields.List(fields.Nested('FavouritesListSchem', only = ['account']))
+    favourites_list = fields.List(fields.Nested('FavouritesListSchema', only = ['account']))
     
     search_input = fields.Nested('SearchInputSchema', only = ['search_input', 'id'])
 
     class Meta:
-        fields = ('id', 'search_input', 'id', 'favourites_list_id', 'date_added')
+        fields = ('id', 'search_input', 'favourites_list_id', 'date_added')
 
 Favourite_search_schema = FavouriteSearchSchema()
 Favourite_searchs_schema = FavouriteSearchSchema(many=True)
-
-# HOW I WANT IT RETURNED
-
-# {
-#   "id": 1,
-#   "search_input_id": 1,
-#   "favourites_list_id": 1
-# }
