@@ -8,7 +8,7 @@ from models.user import User
 
 favourite_search_bp = Blueprint('favourite_search_admin', __name__, url_prefix='/favourite_search_admin')
 
-# HIDDEN http://127.0.0.1:8080/favourite_search/2
+# Admin http://127.0.0.1:8080/favourite_search/2
 @favourite_search_bp.route('/<int:favourite_search_id>')
 @jwt_required()
 def get_favourite_search(favourite_search_id):

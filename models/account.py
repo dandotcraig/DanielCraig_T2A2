@@ -18,14 +18,14 @@ class Account(db.Model):
 
 class AccountSchema(ma.Schema):
 
-    account_id = fields.Integer(attribute='id')
+    main_account_id = fields.Integer(attribute='id')
 
     user = fields.Nested('UserSchema', only = ['name', 'email'])
 
-    favourites_list = fields.Nested('FavouritesListSchema', only = ['id', 'favourite_search'])
+    favourites_list = fields.Nested('FavouritesListSchema', only = ['main_favourite_search_id', 'favourite_search'])
     
     class Meta:
-        fields = ('account_id', 'is_business_account', 'user', 'date_added')
+        fields = ('main_account_id', 'is_business_account', 'user', 'date_added')
         ordered=True
 
 Account_schema = AccountSchema()

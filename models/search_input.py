@@ -14,33 +14,19 @@ class SearchInput(db.Model):
 
 class SearchInputSchema(ma.Schema):
 
+    main_search_input_id = fields.Integer(attribute='id')
+
     search_input = fields.String(validate=Length(min=3, error="Search must be atleast 2 characters in length"))
 
-    favourites_list = fields.List(fields.Nested('FavouritesListSchem', only=['id']))
+    favourites_list = fields.List(fields.Nested('FavouritesListSchema', only=['main_favourites_list_id']))
 
-    favourite_search = fields.List(fields.Nested('FavouriteSearchSchema'))
+    # favourite_search = fields.List(fields.Nested('FavouriteSearchSchema'))
 
     class Meta:
-        fields = ('id', 'search_input', 'date_added', 'favourites_list')
+        fields = ('main_search_input_id ', 'search_input', 'date_added', 'favourites_list')
         ordered = True
 
 Search_input_Schema = SearchInputSchema()
 Search_inputs_Schema = SearchInputSchema(many=True)
 
 
-# HOW I WANT IT RETURNED
-
-# {
-#   "id": 1,
-#   "date": "2024-03-15",
-#   "search_input": "restaurants",
-#   "favourites_list": [
-#     {
-#       "date": "2024-03-15",
-#       "account": {
-#         "id": 1,
-#         "account_type": "personal"
-#       }
-#     }
-#   ]
-# }

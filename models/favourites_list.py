@@ -3,6 +3,7 @@ from marshmallow import fields
 from models.favourite_search import FavouriteSearch
 from datetime import datetime
 
+
 class FavouritesList(db.Model):
     __tablename__ = "favourites_list"
 
@@ -17,15 +18,16 @@ class FavouritesList(db.Model):
 
 class FavouritesListSchema(ma.Schema):
 
-    account = fields.Nested('AccountSchema', only=('id', 'user'))
+    main_favourites_list_id = fields.Integer(attribute='id')
 
-    search_input = (fields.Nested('SearchInputSchema', only = ['search_input']))
+    account = fields.Nested('AccountSchema', only=('main_account_id', 'user'))
 
-    favourite_search = fields.List(fields.Nested('FavouriteSearchSchema'))
-    
+    favourite_search = fields.List(fields.Nested('FavouriteSearchSchema', only=('search_input', 'date_added')))
+
     class Meta:
-        fields = ('id', 'account', 'date_added', 'search_input', 'favourite_search')
+        fields = ('main_favourites_list_id', 'account', 'date_added', 'favourite_search')
         ordered=True
+
 
 Favourites_list_schema = FavouritesListSchema()
 Favourites_lists_schema = FavouritesListSchema(many=True)

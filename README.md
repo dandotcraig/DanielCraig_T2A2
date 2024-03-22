@@ -229,3 +229,5 @@ All tasks will be allocated and tracked using the free version of Trello. First 
 * https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html#one-to-one
 * https://rest-apis-flask.teclado.com/docs/sqlalchemy_many_to_many/many_to_many_relationships/
 * https://stackoverflow.com/questions/18110033/getting-first-row-from-sqlalchemy
+* https://marshmallow.readthedocs.io/en/stable/marshmallow.fields.html
+* https://stackoverflow.com/questions/61051249/what-exactly-is-the-attribute-in-marshmallow-fields-nested-function

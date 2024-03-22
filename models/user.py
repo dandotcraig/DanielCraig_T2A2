@@ -14,10 +14,12 @@ class User(db.Model):
     
 class UserSchema(ma.Schema):
 
+    main_users_id = fields.Integer(attribute='id')
+
     account = fields.Nested('AccountSchema', exclude=['user'])
     
     class Meta:
-        fields = ('id', 'name', 'email', 'password', 'is_admin', 'account')
+        fields = ('main_users_id', 'name', 'email', 'password', 'is_admin', 'account')
 
 User_schema = UserSchema(exclude=['password'])
 Users_schema = UserSchema(many=True, exclude=['password'])

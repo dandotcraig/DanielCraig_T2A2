@@ -17,13 +17,13 @@ class FavouriteSearch(db.Model):
     
 
 class FavouriteSearchSchema(ma.Schema):
+    main_favourite_search_id = fields.Integer(attribute='id')
 
-    favourites_list = fields.List(fields.Nested('FavouritesListSchema', only = ['account']))
-    
-    search_input = fields.Nested('SearchInputSchema', only = ['search_input', 'id'])
+    search_input = fields.Nested('SearchInputSchema', only=('search_input', 'date_added'))
 
     class Meta:
-        fields = ('id', 'search_input', 'favourites_list_id', 'date_added')
+        fields = ('main_favourite_search_id', 'search_input', 'favourites_list_id', 'date_added')
+
 
 Favourite_search_schema = FavouriteSearchSchema()
 Favourite_searchs_schema = FavouriteSearchSchema(many=True)

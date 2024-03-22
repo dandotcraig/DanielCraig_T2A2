@@ -1,6 +1,8 @@
 import os
 from flask import Flask
 from marshmallow.exceptions import ValidationError
+from sqlalchemy.exc import IntegrityError
+
 from init import db, ma, bcrypt, jwt
 
 def create_app():
@@ -21,6 +23,14 @@ def create_app():
     @app.errorhandler(ValidationError)
     def validation_error(error):
         return {"error": error.messages}, 400
+    
+    @app.errorhandler(400)
+    def bad_request(err):
+        return {"error": str(err)}, 400
+
+    # @app.errorhandler(IntegrityError)
+    # def IntegrityError_error(error):
+    #     return {"error": error.messages}, 500
 
     #adds the comand line controller
     from controllers.cli_controller import db_commands
